@@ -1,7 +1,9 @@
+import {FC} from 'react';
+
 /**
  * A shared component that specifies the icon to represent a cart
  */
-export default function CartIcon() {
+export const CartIcon: FC = () => {
   return (
     <svg
       aria-hidden="true"
@@ -30,4 +32,4 @@ export default function CartIcon() {
       />
     </svg>
   );
-}
+};

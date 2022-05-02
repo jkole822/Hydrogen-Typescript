@@ -1,7 +1,10 @@
+// React
+import {FC} from 'react';
+
 /**
  * A shared component that specifies the icon to render when opened
  */
-export default function OpenIcon() {
+export const OpenIcon: FC = () => {
   return (
     <svg
       width="24"
@@ -30,4 +33,4 @@ export default function OpenIcon() {
       />
     </svg>
   );
-}
+};
