@@ -1,23 +1,33 @@
+// React
+import {FC} from 'react';
+
+// Packages
 import {useServerProps} from '@shopify/hydrogen/client';
-import SpinnerIcon from './SpinnerIcon.client';
+import SpinnerIcon from '@/components/client/SpinnerIcon.client';
+
+// Styles
+import {ButtonStyles, OuterContainerStyles} from './styles';
+
+// Types
+import {LoadMoreProductsProps} from './types';
 
 /**
  * A client component that provides functionality to initially show a subset of products and a button to load more products
  */
-export default function LoadMoreProducts({startingCount}) {
+export const LoadMoreProducts: FC<LoadMoreProductsProps> = ({
+  startingCount,
+}) => {
   const {pending, serverProps, setServerProps} = useServerProps();
 
   return (
-    <div className="flex justify-center h-14">
+    <div className={OuterContainerStyles}>
       {pending ? (
         <SpinnerIcon />
       ) : (
         <button
           type="button"
           disabled={pending}
-          className={`uppercase border-4 bg-white border-black text-black text-center px-5 py-3 font-mono font-bold drop-shadow-lg active:drop-shadow-none hover:bg-black hover:text-white hover:border-white ${
-            pending ? 'opacity-50' : undefined
-          }`}
+          className={ButtonStyles(pending)}
           onClick={() => {
             setServerProps(
               'collectionProductCount',
@@ -32,4 +42,4 @@ export default function LoadMoreProducts({startingCount}) {
       )}
     </div>
   );
-}
+};

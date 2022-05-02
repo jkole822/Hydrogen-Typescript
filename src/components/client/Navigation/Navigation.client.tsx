@@ -1,17 +1,27 @@
+// React
+import {FC} from 'react';
+
+// Packages
 import {Link} from '@shopify/hydrogen/client';
+
+// Styles
+import {OuterContainerStyles, ListStyles, LinkStyles} from './styles';
+
+// Types
+import {NavigationProps} from './types';
 
 /**
  * A client component that defines the navigation for a web storefront
  */
-export default function Navigation({collections}) {
+export const Navigation: FC<NavigationProps> = ({collections}) => {
   return (
-    <nav className="hidden lg:block text-center">
-      <ul className="md:flex items-center justify-center">
+    <nav className={OuterContainerStyles}>
+      <ul className={ListStyles}>
         {collections.map((collection) => (
           <li key={collection.id}>
             <Link
               to={`/collections/${collection.handle}`}
-              className="block p-4 hover:opacity-80"
+              className={LinkStyles}
             >
               {collection.title}
             </Link>
@@ -20,4 +30,4 @@ export default function Navigation({collections}) {
       </ul>
     </nav>
   );
-}
+};

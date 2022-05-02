@@ -1,14 +1,28 @@
+// React
+import {FC} from 'react';
+
+// Packages
 import {useProduct, MediaFile, Image} from '@shopify/hydrogen/client';
+
+// Styles
+import {ImageStyles, OuterContainerStyles, MediaFileStyles} from './styles';
+
+const MODEL_3D_TYPE = 'MODEL_3D';
+const MODEL_3D_PROPS = {
+  interactionPromptThreshold: '0',
+};
+const VIDEO_TYPE = 'VIDEO';
+const EXTERNAL_VIDEO_TYPE = 'EXTERNAL_VIDEO';
 
 /**
  * A client component that defines a media gallery for hosting images, 3D models, and videos of products
  */
-export default function Gallery() {
+export const Gallery: FC = () => {
   const {media, selectedVariant} = useProduct();
 
-  const featuredMedia = selectedVariant.image || media[0]?.image;
+  const featuredMedia = selectedVariant?.image || media[0]?.image;
   const featuredMediaSrc = featuredMedia?.url.split('?')[0];
-  const galleryMedia = media.filter((med) => {
+  const galleryMedia = media.filter((med: any) => {
     if (
       med.mediaContentType === MODEL_3D_TYPE ||
       med.mediaContentType === VIDEO_TYPE ||
@@ -26,15 +40,17 @@ export default function Gallery() {
 
   return (
     <div
-      className="gap-4 flex md:grid md:grid-cols-2 overflow-x-scroll no-scrollbar scroll-snap-x scroll-smooth h-[485px] md:h-auto place-content-start"
+      className={OuterContainerStyles}
+      //@ts-ignore
       tabIndex="-1"
     >
       <Image
+        className={ImageStyles}
+        //@ts-ignore
+        data={selectedVariant?.image}
         fetchpriority="high"
-        data={selectedVariant.image}
-        className="w-[80vw] md:w-full h-full md:h-auto object-cover object-center flex-shrink-0 md:flex-shrink-none snap-start md:col-span-2 border border-gray-200 rounded-lg"
       />
-      {galleryMedia.map((med) => {
+      {galleryMedia.map((med: any) => {
         let extraProps = {};
 
         if (med.mediaContentType === MODEL_3D_TYPE) {
@@ -43,26 +59,21 @@ export default function Gallery() {
 
         return (
           <MediaFile
-            tabIndex="0"
-            key={med.id || med.image.id}
-            className="w-[80vw] md:w-auto h-full md:h-auto object-cover object-center transition-all snap-start border border-gray-200 flex-shrink-0 rounded-lg"
+            //@ts-ignore
+            className={MediaFileStyles}
             data={med}
             fetchpriority="low"
+            key={med.id || med.image.id}
             options={{
               height: '485',
               crop: 'center',
             }}
+            //@ts-ignore
+            tabIndex="0"
             {...extraProps}
           />
         );
       })}
     </div>
   );
-}
-
-const MODEL_3D_TYPE = 'MODEL_3D';
-const MODEL_3D_PROPS = {
-  interactionPromptThreshold: '0',
 };
-const VIDEO_TYPE = 'VIDEO';
-const EXTERNAL_VIDEO_TYPE = 'EXTERNAL_VIDEO';

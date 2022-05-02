@@ -1,16 +1,32 @@
-import {useEffect, useState} from 'react';
+// React
+import {FC, useEffect, useState} from 'react';
+
+// Packages
 import {Link} from '@shopify/hydrogen/client';
 
-import CartToggle from './CartToggle.client';
-import {useCartUI} from '../../lib/context/CartUIProvider.client';
-import CountrySelector from './CountrySelector.client';
-import Navigation from './Navigation.client';
-import MobileNavigation from './MobileNavigation.client';
+// Components
+import {CartToggle} from '@/components/client/CartToggle';
+import {useCartUI} from '@/lib/context/CartUIProvider.client';
+import {CountrySelector} from '@/components/client/CountrySelector';
+import Navigation from '@/components/client/Navigation.client';
+import MobileNavigation from '@/components/client/MobileNavigation.client';
+
+// Styles
+import {
+  HeaderStyles,
+  OuterContainerStyles,
+  InnerContainerStyles,
+  ContentWrapper,
+  LinkStyles,
+} from './styles';
+
+// Types
+import {HeaderProps} from './types';
 
 /**
  * A client component that specifies the content of the header on the website
  */
-export default function Header({collections, storeName}) {
+export const Header: FC<HeaderProps> = ({collections, storeName}) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
   const {isCartOpen} = useCartUI();
@@ -23,29 +39,22 @@ export default function Header({collections, storeName}) {
   }, [isCartOpen]);
 
   return (
-    <header className="h-20 lg:h-32" role="banner">
-      <div
-        className={`fixed z-20 h-20 lg:h-32 w-full border-b border-gray-200 px-6 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${
-          isMobileNavOpen ? '' : 'bg-opacity-95'
-        }`}
-      >
+    <header className={HeaderStyles} role="banner">
+      <div className={OuterContainerStyles(isMobileNavOpen)}>
         <div
-          className="h-full flex lg:flex-col place-content-between"
+          className={InnerContainerStyles}
           style={{
             paddingRight: isCartOpen ? scrollbarWidth : 0,
           }}
         >
-          <div className="text-center w-full flex justify-between items-center">
+          <div className={ContentWrapper}>
             <CountrySelector />
             <MobileNavigation
               collections={collections}
               isOpen={isMobileNavOpen}
               setIsOpen={setIsMobileNavOpen}
             />
-            <Link
-              className="font-black uppercase text-3xl tracking-widest"
-              to="/"
-            >
+            <Link className={LinkStyles} to="/">
               {storeName}
             </Link>
             <CartToggle
@@ -59,4 +68,4 @@ export default function Header({collections, storeName}) {
       </div>
     </header>
   );
-}
+};

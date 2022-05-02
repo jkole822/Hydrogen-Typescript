@@ -1,53 +1,66 @@
-import {useState, Suspense} from 'react';
+// React
+import {FC, useState, Suspense} from 'react';
+
+// Packages
 import {useCountry} from '@shopify/hydrogen/client';
 import {Listbox} from '@headlessui/react';
-import SpinnerIcon from './SpinnerIcon.client';
 
-import {ArrowIcon, Countries} from './CountrySelector.client';
+// Components
+import SpinnerIcon from '@/components/client/SpinnerIcon.client';
+import {ArrowIcon, Countries} from '@/components/client/CountrySelector';
+
+// Styles
+import {
+  ButtonStyles,
+  CountriesStyles,
+  ListboxOptionsStyles,
+  ListboxOptionStyles,
+  OuterContainerStyles,
+  SuspenseStyles,
+} from './styles';
 
 /**
  * A client component that selects the appropriate country to display for products on a mobile storefront
  */
-export default function MobileCountrySelector() {
+export const MobileCountrySelector: FC = () => {
   const [listboxOpen, setListboxOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useCountry();
 
   return (
-    <div className="mt-8 rounded border border-gray-200 w-full">
-      <Listbox onChange={setSelectedCountry}>
+    <div className={OuterContainerStyles}>
+      <Listbox
+        //@ts-ignore
+        onChange={setSelectedCountry}
+      >
         {({open}) => {
           setTimeout(() => setListboxOpen(open));
           return (
             <>
-              <Listbox.Button className="w-full flex justify-between text-sm items-center py-5 px-7">
-                {selectedCountry.name}
+              <Listbox.Button className={ButtonStyles}>
+                {selectedCountry?.name}
                 <ArrowIcon isOpen={open} />
               </Listbox.Button>
-              <Listbox.Options className="w-full px-3 pb-2 text-lg overflow-y-auto h-64">
+              <Listbox.Options className={ListboxOptionsStyles}>
                 <Listbox.Option
                   disabled
-                  className="font-medium px-4 pb-4 w-full text-left uppercase"
+                  className={ListboxOptionStyles}
+                  value=""
                 >
                   Country
                 </Listbox.Option>
                 {listboxOpen && (
                   <Suspense
                     fallback={
-                      <div className="flex justify-center">
+                      <div className={SuspenseStyles}>
                         <SpinnerIcon />
                       </div>
                     }
                   >
                     <Countries
                       selectedCountry={selectedCountry}
-                      getClassName={(active) => {
-                        return (
-                          `py-2 px-4 rounded flex justify-between items-center text-left ` +
-                          `w-full cursor-pointer ${
-                            active ? 'bg-gray-100' : null
-                          }`
-                        );
-                      }}
+                      getClassName={(active: boolean) =>
+                        CountriesStyles(active)
+                      }
                     />
                   </Suspense>
                 )}
@@ -58,4 +71,4 @@ export default function MobileCountrySelector() {
       </Listbox>
     </div>
   );
-}
+};
