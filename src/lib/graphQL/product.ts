@@ -1,40 +1,6 @@
-import {useShop, useShopQuery, Seo, useRouteParams} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
-import {ProductDetails} from '../../components/client/ProductDetails';
-import {NotFound} from '../../components/server/NotFound/index.server';
-import {Layout} from '../../components/server/Layout/index.server';
-
-export default function Product({country = {isoCode: 'US'}}) {
-  const {handle} = useRouteParams();
-
-  const {languageCode} = useShop();
-
-  const {
-    data: {product},
-  } = useShopQuery({
-    query: QUERY,
-    variables: {
-      country: country.isoCode,
-      language: languageCode,
-      handle,
-    },
-    preload: true,
-  });
-
-  if (!product) {
-    return <NotFound />;
-  }
-
-  return (
-    <Layout>
-      <Seo type="product" data={product} />
-      <ProductDetails product={product} />
-    </Layout>
-  );
-}
-
-const QUERY = gql`
+export const PRODUCT = gql`
   query product(
     $country: CountryCode
     $language: LanguageCode
