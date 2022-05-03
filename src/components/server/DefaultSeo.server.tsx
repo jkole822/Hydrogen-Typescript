@@ -1,21 +1,28 @@
+// React
+import {FC} from 'react';
+
+// Packages
 import {useShopQuery, Seo, CacheDays} from '@shopify/hydrogen';
-import gql from 'graphql-tag';
+
+// GraphQL
+import {SHOP_INFO} from '@/lib/graphQL';
 
 /**
  * A server component that fetches a `shop.name` and sets default values and templates for every page on a website
  */
-export default function DefaultSeo() {
+export const DefaultSeo: FC = () => {
   const {
     data: {
       shop: {name, description},
     },
   } = useShopQuery({
-    query: QUERY,
+    query: SHOP_INFO,
     cache: CacheDays(),
     preload: '*',
   });
 
   return (
+    //@ts-ignore
     <Seo
       type="defaultSeo"
       data={{
@@ -24,13 +31,4 @@ export default function DefaultSeo() {
       }}
     />
   );
-}
-
-const QUERY = gql`
-  query shopInfo {
-    shop {
-      name
-      description
-    }
-  }
-`;
+};

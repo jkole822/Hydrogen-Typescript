@@ -4,17 +4,19 @@ import {FC} from 'react';
 // Components
 import {ArrowIcon} from '..';
 import {CartIconWithItems} from '@/components/client/CartIconWithItems';
-import {useCartUI} from '@/lib/context/CartUIProvider.client';
+
+// Redux
+import {closeCart, useAppDispatch} from '@/lib/redux';
 
 // Styles
 import {HeaderStyles, SpanStyles, SrOnlyStyles} from './styles';
 
 export const CartHeader: FC = () => {
-  const {closeCart} = useCartUI();
+  const dispatch = useAppDispatch();
 
   return (
     <header className={HeaderStyles}>
-      <button type="button" onClick={closeCart}>
+      <button type="button" onClick={() => dispatch(closeCart())}>
         <ArrowIcon />
         <span className={SrOnlyStyles}>Close cart</span>
       </button>

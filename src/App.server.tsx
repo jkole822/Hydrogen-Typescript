@@ -1,3 +1,7 @@
+// React
+import {FC, Suspense} from 'react';
+
+// Packages
 import renderHydrogen from '@shopify/hydrogen/entry-server';
 import {
   Router,
@@ -6,14 +10,22 @@ import {
   ShopifyProvider,
   CookieSessionStorage,
 } from '@shopify/hydrogen';
-import {Suspense} from 'react';
-import shopifyConfig from '../shopify.config';
-import DefaultSeo from './components/DefaultSeo.server';
-import NotFound from './components/NotFound.server';
-import LoadingFallback from './components/LoadingFallback';
-import CartProvider from './components/CartProvider.client';
 
-function App({routes}) {
+// Components
+import {DefaultSeo} from '@/components/server/DefaultSeo.server';
+import {NotFound} from '@/components/server/NotFound/index.server';
+import {LoadingFallback} from '@/components/hybrid/LoadingFallback';
+
+// Config
+import shopifyConfig from '../shopify.config';
+
+// Context
+import {CartProvider} from '@/lib/context';
+
+// Types
+import {AppProps} from './types';
+
+const App: FC<AppProps> = ({routes}) => {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <ShopifyProvider shopifyConfig={shopifyConfig}>
@@ -27,8 +39,9 @@ function App({routes}) {
       </ShopifyProvider>
     </Suspense>
   );
-}
+};
 
+//@ts-ignore
 const routes = import.meta.globEager('./routes/**/*.server.[jt](s|sx)');
 
 export default renderHydrogen(App, {
@@ -38,7 +51,7 @@ export default renderHydrogen(App, {
     path: '/',
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: 'Strict',
     maxAge: 60 * 60 * 24 * 30,
   }),
 });

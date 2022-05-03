@@ -1,26 +1,47 @@
+// React
+import {FC} from 'react';
+
+// Packages
 import {Link} from '@shopify/hydrogen';
+
+// Styles
+import {
+  DateContainerStyles,
+  DateStyles,
+  HeadlineStyles,
+  InnerContainerStyles,
+  ListItemStyles,
+  ListItemTwoStyles,
+  ListStyles,
+  LinkStyles,
+  OuterContainerStyles,
+  SvgStyles,
+} from './styles';
+
+// Types
+import {FooterProps} from './types';
 
 /**
  * A server component that specifies the content of the footer on the website
  */
-export default function Footer({collection, product}) {
+export const Footer: FC<FooterProps> = ({collection, product}) => {
   return (
     <footer role="contentinfo">
-      <div className="relative bg-white border-t border-b border-black border-opacity-5">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className={OuterContainerStyles}>
+        <div className={InnerContainerStyles}>
           <div>
-            <h2 className="text-md font-medium uppercase mb-4">Community</h2>
-            <ul className="mt-8 space-y-4">
-              <li className="text-sm font-medium text-gray-600 hover:text-gray-900">
+            <h2 className={HeadlineStyles}>Community</h2>
+            <ul className={ListStyles}>
+              <li className={ListItemStyles}>
                 <a
                   href="https://github.com/Shopify/hydrogen/discussions"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center"
+                  className={LinkStyles}
                 >
                   <svg
                     aria-hidden="true"
-                    className="fill-current text-gray-600 mr-3"
+                    className={SvgStyles}
                     width="26"
                     height="20"
                     viewBox="0 0 21 20"
@@ -36,16 +57,16 @@ export default function Footer({collection, product}) {
                   Github discussions
                 </a>
               </li>
-              <li className="text-sm font-medium text-gray-600 hover:text-gray-900">
+              <li className={ListItemStyles}>
                 <a
                   href="https://discord.gg/ppSbThrFaS"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center"
+                  className={LinkStyles}
                 >
                   <svg
                     aria-hidden="true"
-                    className="fill-current text-gray-600 mr-3"
+                    className={SvgStyles}
                     width="26"
                     height="20"
                     viewBox="0 0 26 20"
@@ -60,33 +81,33 @@ export default function Footer({collection, product}) {
             </ul>
           </div>
           <div>
-            <h2 className="text-md font-medium uppercase mb-4">Templates</h2>
-            <ul className="mt-8 space-y-4">
-              <li className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
+            <h2 className={HeadlineStyles}>Templates</h2>
+            <ul className={ListStyles}>
+              <li className={ListItemTwoStyles}>
                 <Link to="/home">Home</Link>
               </li>
-              <li className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
+              <li className={ListItemTwoStyles}>
                 <Link to={`/products/${product?.handle}`}>Product</Link>
               </li>
-              <li className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
+              <li className={ListItemTwoStyles}>
                 <Link to={`/collections/${collection?.handle}`}>
                   Collection
                 </Link>
               </li>
-              <li className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
+              <li className={ListItemTwoStyles}>
                 <Link to="/404">404</Link>
               </li>
             </ul>
           </div>
           <div>
-            <h2 className="text-md font-medium uppercase mb-4">Docs</h2>
-            <ul className="mt-8 space-y-4">
-              <li className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
+            <h2 className={HeadlineStyles}>Docs</h2>
+            <ul className={ListStyles}>
+              <li className={ListItemTwoStyles}>
                 <a href="https://shopify.dev/custom-storefronts/hydrogen">
                   Hydrogen overview
                 </a>
               </li>
-              <li className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
+              <li className={ListItemTwoStyles}>
                 <a href="https://shopify.dev/custom-storefronts/hydrogen/templates">
                   Demo Store template
                 </a>
@@ -95,9 +116,9 @@ export default function Footer({collection, product}) {
           </div>
         </div>
       </div>
-      <div className="py-6 px-4 md:px-8 bg-gray-50">
-        <p className="text-gray-600">© {new Date().getFullYear()} Shopify</p>
+      <div className={DateContainerStyles}>
+        <p className={DateStyles}>© {new Date().getFullYear()} Shopify</p>
       </div>
     </footer>
   );
-}
+};

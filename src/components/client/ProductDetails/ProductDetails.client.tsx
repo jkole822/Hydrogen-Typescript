@@ -11,7 +11,7 @@ import {
 } from '@shopify/hydrogen/client';
 
 // Components
-import ProductOptions from '@/components/client/ProductOptions.client';
+import {ProductOptions} from '@/components/client/ProductOptions';
 import {Gallery} from '@/components/client/Gallery';
 import {AddToCartMarkup, ProductPrices, SizeChart} from './components';
 

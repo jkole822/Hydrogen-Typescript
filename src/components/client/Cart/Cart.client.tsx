@@ -7,7 +7,9 @@ import {useCart} from '@shopify/hydrogen/client';
 
 // Components
 import {CartEmpty, CartFooter, CartHeader, CartItems} from './components';
-import {useCartUI} from '@/lib/context/CartUIProvider.client';
+
+// Redux
+import {closeCart, useAppDispatch, useAppSelector} from '@/lib/redux';
 
 // Styles
 import {
@@ -20,7 +22,8 @@ import {
  * A client component that contains the merchandise that a customer intends to purchase, and the estimated cost associated with the cart
  */
 export const Cart: FC = () => {
-  const {isCartOpen, closeCart} = useCartUI();
+  const isCartOpen = useAppSelector((state) => state.cart.isCartOpen);
+  const dispatch = useAppDispatch();
   const {totalQuantity} = useCart();
 
   return (
@@ -28,9 +31,9 @@ export const Cart: FC = () => {
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div
         className={OuterContainerStyles(isCartOpen)}
-        onClick={isCartOpen ? closeCart : undefined}
+        onClick={() => dispatch(closeCart())}
       />
-      <Dialog open={isCartOpen} onClose={closeCart}>
+      <Dialog open={isCartOpen} onClose={() => dispatch(closeCart())}>
         <Dialog.Overlay className={DialogOverlayStyles} />
         <div className={InnerContainerStyles(totalQuantity)}>
           <CartHeader />

@@ -1,20 +1,24 @@
 // React
 import {FC} from 'react';
 
-// Components
-import {useCartUI} from '@/lib/context/CartUIProvider.client';
+// Redux
+import {closeCart, useAppDispatch} from '@/lib/redux';
 
 // Styles
 import {ContainerStyles, ParagraphStyles} from './styles';
 import {PrimaryButtonStyles} from '@/components/client/Button/styles';
 
 export const CartEmpty: FC = () => {
-  const {closeCart} = useCartUI();
+  const dispatch = useAppDispatch();
 
   return (
     <div className={ContainerStyles}>
       <p className={ParagraphStyles}>Your cart is empty</p>
-      <button type="button" onClick={closeCart} className={PrimaryButtonStyles}>
+      <button
+        type="button"
+        onClick={() => dispatch(closeCart())}
+        className={PrimaryButtonStyles}
+      >
         Continue Shopping
       </button>
     </div>

@@ -1,3 +1,7 @@
+// React
+import {FC} from 'react';
+
+// Components
 import {CartIcon} from '@/components/hybrid/CartIcon';
 import {OpenIcon} from '@/components/hybrid/OpenIcon';
 
@@ -15,7 +19,7 @@ import {
 /**
  * A shared component and Suspense call that's used in `App.server.jsx` to let your app wait for code to load while declaring a loading state
  */
-export default function LoadingFallback() {
+export const LoadingFallback: FC = () => {
   return (
     <header className={HeaderStyles}>
       <div className={ContainerOneStyles}>
@@ -32,4 +36,4 @@ export default function LoadingFallback() {
       </div>
     </header>
   );
-}
+};

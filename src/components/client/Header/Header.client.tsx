@@ -6,10 +6,12 @@ import {Link} from '@shopify/hydrogen/client';
 
 // Components
 import {CartToggle} from '@/components/client/CartToggle';
-import {useCartUI} from '@/lib/context/CartUIProvider.client';
 import {CountrySelector} from '@/components/client/CountrySelector';
-import Navigation from '@/components/client/Navigation.client';
-import MobileNavigation from '@/components/client/MobileNavigation.client';
+import {Navigation} from '@/components/client/Navigation';
+import {MobileNavigation} from '@/components/client/MobileNavigation';
+
+// Redux
+import {useAppSelector} from '@/lib/redux';
 
 // Styles
 import {
@@ -29,7 +31,7 @@ import {HeaderProps} from './types';
 export const Header: FC<HeaderProps> = ({collections, storeName}) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
-  const {isCartOpen} = useCartUI();
+  const isCartOpen = useAppSelector((state) => state.cart.isCartOpen);
 
   useEffect(() => {
     const scrollbarWidth =
@@ -50,6 +52,7 @@ export const Header: FC<HeaderProps> = ({collections, storeName}) => {
           <div className={ContentWrapper}>
             <CountrySelector />
             <MobileNavigation
+              //@ts-ignore
               collections={collections}
               isOpen={isMobileNavOpen}
               setIsOpen={setIsMobileNavOpen}
@@ -63,7 +66,11 @@ export const Header: FC<HeaderProps> = ({collections, storeName}) => {
               }}
             />
           </div>
-          <Navigation collections={collections} storeName={storeName} />
+          <Navigation
+            //@ts-ignore
+            collections={collections}
+            storeName={storeName}
+          />
         </div>
       </div>
     </header>

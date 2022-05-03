@@ -1,9 +1,9 @@
 import {useShop, useShopQuery, Seo, useRouteParams} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
-import ProductDetails from '../../components/ProductDetails.client';
-import NotFound from '../../components/NotFound.server';
-import Layout from '../../components/Layout.server';
+import {ProductDetails} from '../../components/client/ProductDetails';
+import {NotFound} from '../../components/server/NotFound/index.server';
+import {Layout} from '../../components/server/Layout/index.server';
 
 export default function Product({country = {isoCode: 'US'}}) {
   const {handle} = useRouteParams();

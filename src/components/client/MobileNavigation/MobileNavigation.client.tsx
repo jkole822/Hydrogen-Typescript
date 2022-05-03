@@ -7,11 +7,19 @@ import {FocusTrap} from '@headlessui/react';
 
 // Components
 import {MobileCountrySelector} from '@/components/client/MobileCountrySelector';
-import OpenIcon from '@/components/hybrid/OpenIcon';
+import {OpenIcon} from '@/components/hybrid/OpenIcon';
 import {ArrowRightIcon, CloseIcon} from './components';
 
 // Styles
-import { OuterContainerStyles, ButtonStyles, SrOnlyStyles, InnerContainerStyles, ListStyles, LinkStyles, ArrowRightIconStyles } from './styles';{} from './styles'
+import {
+  OuterContainerStyles,
+  ButtonStyles,
+  SrOnlyStyles,
+  InnerContainerStyles,
+  ListStyles,
+  LinkStyles,
+  ArrowRightIconStyles,
+} from './styles';
 
 // Types
 import {MobileNavigationProps} from './types';
@@ -52,7 +60,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
           {isOpen ? <CloseIcon /> : <OpenIcon />}
         </button>
         {isOpen ? (
-          <div className="">
+          <div className={InnerContainerStyles}>
             <ul>
               {collections.map((collection) => (
                 <li className={ListStyles} key={collection.id}>

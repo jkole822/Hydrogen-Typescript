@@ -3,7 +3,7 @@ import {FC} from 'react';
 
 // Packages
 import {useServerProps} from '@shopify/hydrogen/client';
-import SpinnerIcon from '@/components/client/SpinnerIcon.client';
+import {SpinnerIcon} from '@/components/client/SpinnerIcon';
 
 // Styles
 import {ButtonStyles, OuterContainerStyles} from './styles';

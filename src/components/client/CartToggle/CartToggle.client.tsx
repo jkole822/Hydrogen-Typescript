@@ -2,8 +2,10 @@
 import {FC} from 'react';
 
 // Components
-import {useCartUI} from '@/lib/context/CartUIProvider.client';
 import {CartIconWithItems} from '@/components/client/CartIconWithItems';
+
+// Redux
+import {toggleCart, useAppDispatch, useAppSelector} from '@/lib/redux';
 
 // Styles
 import {SrOnlyStyles} from './styles';
@@ -15,13 +17,8 @@ import {CartToggleProps} from './types';
  * A client component that defines the behavior when a user toggles a cart
  */
 export const CartToggle: FC<CartToggleProps> = ({handleClick}) => {
-  const cartUI = useCartUI();
-
-  if (cartUI == null) {
-    throw new Error('CartToggle must be a descendent of a CartUIProvider');
-  }
-
-  const {isCartOpen, toggleCart} = cartUI;
+  const isCartOpen = useAppSelector((state) => state.cart.isCartOpen);
+  const dispatch = useAppDispatch();
 
   return (
     <button
@@ -29,7 +26,7 @@ export const CartToggle: FC<CartToggleProps> = ({handleClick}) => {
       aria-expanded={isCartOpen}
       aria-controls="cart"
       onClick={() => {
-        toggleCart();
+        dispatch(toggleCart());
         handleClick();
       }}
     >

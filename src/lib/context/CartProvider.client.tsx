@@ -1,33 +1,30 @@
 // React
-import {AllHTMLAttributes, FC, useCallback} from 'react';
+import {AllHTMLAttributes, FC} from 'react';
 
 // Packages
 import {CartProvider as ShopifyCartProvider} from '@shopify/hydrogen/client';
+import {Provider} from 'react-redux';
 
-// Components
-import {CartUIProvider, useCartUI} from './CartUIProvider.client';
+// Redux
+import {store, openCart, useAppDispatch} from '@/lib/redux';
 
 // Types
 interface ProviderInterface extends AllHTMLAttributes<HTMLElement> {
-  numCartLines: number;
+  numCartLines?: number;
 }
 
 /**
  * A client component that creates a cart object and provides callbacks that can be accessed by any descendent component using the `useCart` hook and related hooks
  */
-const Provider: FC<ProviderInterface> = ({children, numCartLines}) => {
-  const {openCart} = useCartUI();
-
-  const open = useCallback(() => {
-    openCart();
-  }, [openCart]);
+const ShopifyProvider: FC<ProviderInterface> = ({children, numCartLines}) => {
+  const dispatch = useAppDispatch();
 
   return (
     <>
       <ShopifyCartProvider
         numCartLines={numCartLines}
-        onLineAdd={open}
-        onCreate={open}
+        onLineAdd={() => dispatch(openCart())}
+        onCreate={() => dispatch(openCart())}
       >
         {children}
       </ShopifyCartProvider>
@@ -40,8 +37,8 @@ export const CartProvider: FC<ProviderInterface> = ({
   numCartLines,
 }) => {
   return (
-    <CartUIProvider>
-      <Provider numCartLines={numCartLines}>{children}</Provider>
-    </CartUIProvider>
+    <Provider store={store}>
+      <ShopifyProvider numCartLines={numCartLines}>{children}</ShopifyProvider>
+    </Provider>
   );
 };

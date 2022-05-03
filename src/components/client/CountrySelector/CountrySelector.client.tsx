@@ -7,7 +7,7 @@ import {Listbox} from '@headlessui/react';
 
 // Components
 import {ArrowIcon, Countries} from './components';
-import SpinnerIcon from '../SpinnerIcon.client';
+import {SpinnerIcon} from '@/components/client/SpinnerIcon';
 
 // Styles
 import {

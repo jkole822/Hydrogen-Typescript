@@ -1,10 +1,10 @@
 import {useShop, useShopQuery, flattenConnection, Seo} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
-import LoadMoreProducts from '../../components/LoadMoreProducts.client';
-import Layout from '../../components/Layout.server';
-import ProductCard from '../../components/ProductCard';
-import NotFound from '../../components/NotFound.server';
+import {LoadMoreProducts} from '../../components/client/LoadMoreProducts';
+import {Layout} from '../../components/server/Layout/index.server';
+import {ProductCard} from '../../components/hybrid/ProductCard';
+import {NotFound} from '../../components/server/NotFound/index.server';
 
 export default function Collection({
   country = {isoCode: 'US'},

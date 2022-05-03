@@ -6,7 +6,7 @@ import {useCountry} from '@shopify/hydrogen/client';
 import {Listbox} from '@headlessui/react';
 
 // Components
-import SpinnerIcon from '@/components/client/SpinnerIcon.client';
+import {SpinnerIcon} from '@/components/client/SpinnerIcon';
 import {ArrowIcon, Countries} from '@/components/client/CountrySelector';
 
 // Styles

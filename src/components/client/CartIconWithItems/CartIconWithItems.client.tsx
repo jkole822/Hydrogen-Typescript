@@ -5,7 +5,7 @@ import {FC} from 'react';
 import {useCart} from '@shopify/hydrogen/client';
 
 // Components
-import CartIcon from '@/components/hybrid/CartIcon';
+import {CartIcon} from '@/components/hybrid/CartIcon';
 
 // Styles
 import {
