@@ -5,8 +5,8 @@ import {FC} from 'react';
 import {useShop, useShopQuery, Seo} from '@shopify/hydrogen';
 
 // Components
-import {Layout} from '@/components/server/Layout/index.server';
-import {NotFound} from '@/components/server/NotFound/index.server';
+import Layout from '@/components/server/Layout/index.server';
+import NotFound from '@/components/server/NotFound/index.server';
 
 // GraphQL
 import {PAGE_DETAILS} from '@/lib/graphQL';

@@ -24,7 +24,7 @@ import {FooterProps} from './types';
 /**
  * A server component that specifies the content of the footer on the website
  */
-export const Footer: FC<FooterProps> = ({collection, product}) => {
+const Footer: FC<FooterProps> = ({collection, product}) => {
   return (
     <footer role="contentinfo">
       <div className={OuterContainerStyles}>
@@ -122,3 +122,5 @@ export const Footer: FC<FooterProps> = ({collection, product}) => {
     </footer>
   );
 };
+
+export default Footer;

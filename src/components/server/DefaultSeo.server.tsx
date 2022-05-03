@@ -10,7 +10,7 @@ import {SHOP_INFO} from '@/lib/graphQL';
 /**
  * A server component that fetches a `shop.name` and sets default values and templates for every page on a website
  */
-export const DefaultSeo: FC = () => {
+const DefaultSeo: FC = () => {
   const {
     data: {
       shop: {name, description},
@@ -32,3 +32,5 @@ export const DefaultSeo: FC = () => {
     />
   );
 };
+
+export default DefaultSeo;

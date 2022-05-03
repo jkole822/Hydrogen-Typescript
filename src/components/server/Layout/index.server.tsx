@@ -11,7 +11,7 @@ import {
 
 // Components
 import {Cart} from '@/components/client/Cart/';
-import {Footer} from '@/components/server/Footer/index.server';
+import Footer from '@/components/server/Footer/index.server';
 import {Header} from '@/components/client/Header';
 
 // GraphQL
@@ -32,7 +32,7 @@ import {LayoutProps} from './types';
 /**
  * A server component that defines a structure and organization of a page that can be used in different parts of the Hydrogen app
  */
-export const Layout: FC<LayoutProps> = ({children, hero}) => {
+const Layout: FC<LayoutProps> = ({children, hero}) => {
   const {languageCode} = useShop();
 
   const {data}: any = useShopQuery({
@@ -81,3 +81,5 @@ export const Layout: FC<LayoutProps> = ({children, hero}) => {
     </LocalizationProvider>
   );
 };
+
+export default Layout;

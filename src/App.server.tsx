@@ -12,8 +12,8 @@ import {
 } from '@shopify/hydrogen';
 
 // Components
-import {DefaultSeo} from '@/components/server/DefaultSeo.server';
-import {NotFound} from '@/components/server/NotFound/index.server';
+import DefaultSeo from '@/components/server/DefaultSeo.server';
+import NotFound from '@/components/server/NotFound/index.server';
 import {LoadingFallback} from '@/components/hybrid/LoadingFallback';
 
 // Config

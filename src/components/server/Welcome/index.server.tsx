@@ -22,7 +22,7 @@ import {
 /**
  * A server component that displays the content on the homepage of the Hydrogen app
  */
-export const Welcome: FC = () => {
+const Welcome: FC = () => {
   return (
     <div className={OuterContainerStyles}>
       <div className={InnerContainerStyles}>
@@ -53,3 +53,5 @@ export const Welcome: FC = () => {
     </div>
   );
 };
+
+export default Welcome;

@@ -6,8 +6,8 @@ import {useShop, useShopQuery, Seo, useRouteParams} from '@shopify/hydrogen';
 
 // Components
 import {ProductDetails} from '@/components/client/ProductDetails';
-import {NotFound} from '@/components/server/NotFound/index.server';
-import {Layout} from '@/components/server/Layout/index.server';
+import NotFound from '@/components/server/NotFound/index.server';
+import Layout from '@/components/server/Layout/index.server';
 
 // GraphQL
 import {PRODUCT} from '@/lib/graphQL';

@@ -2,8 +2,8 @@
 import {FC, Suspense} from 'react';
 
 // Components
-import {Layout} from '@/components/server/Layout/index.server';
-import {Welcome} from '@/components/server/Welcome/index.server';
+import Layout from '@/components/server/Layout/index.server';
+import Welcome from '@/components/server/Welcome/index.server';
 import {
   GradientBackground,
   SeoForHomepage,

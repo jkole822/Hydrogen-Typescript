@@ -6,9 +6,9 @@ import {useShop, useShopQuery, flattenConnection, Seo} from '@shopify/hydrogen';
 
 // Components
 import {LoadMoreProducts} from '@/components/client/LoadMoreProducts';
-import {Layout} from '@/components/server/Layout/index.server';
+import Layout from '@/components/server/Layout/index.server';
 import {ProductCard} from '@/components/hybrid/ProductCard';
-import {NotFound} from '@/components/server/NotFound/index.server';
+import NotFound from '@/components/server/NotFound/index.server';
 
 // GraphQL
 import {COLLECTION_DETAILS} from '@/lib/graphQL';
