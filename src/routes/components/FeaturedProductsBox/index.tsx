@@ -24,6 +24,7 @@ import {
   LinkTwoStyles,
   LinkContainerStyles,
   InnerContainerStyles,
+  GridStyles,
 } from './styles';
 
 // Types
@@ -50,10 +51,10 @@ export const FeaturedProductsBox: FC<FeaturedProductsBoxProps> = ({
     : null;
 
   return (
-    <div className="">
+    <div className={OuterContainerStyles}>
       {featuredProductsCollection ? (
         <>
-          <div className={OuterContainerStyles}>
+          <div className={InnerContainerStyles}>
             <span className={SpanOneStyles}>
               {featuredProductsCollection.title}
             </span>
@@ -66,7 +67,7 @@ export const FeaturedProductsBox: FC<FeaturedProductsBoxProps> = ({
               </Link>
             </span>
           </div>
-          <div className={InnerContainerStyles}>
+          <div className={GridStyles}>
             {featuredProducts?.map((product: any) => (
               <div key={product.id}>
                 <ProductCard product={product} />

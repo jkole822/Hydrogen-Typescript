@@ -6,6 +6,15 @@ export const OuterContainerStyles = `
     mb-10
 `;
 
+export const InnerContainerStyles = `
+    flex 
+    justify-between 
+    items-center 
+    mb-8 
+    text-md 
+    font-medium
+`;
+
 export const SpanOneStyles = `
     text-black 
     uppercase
@@ -21,7 +30,7 @@ export const LinkOneStyles = `
     hover:underline
 `;
 
-export const InnerContainerStyles = `
+export const GridStyles = `
     grid 
     grid-cols-1 
     md:grid-cols-2 
